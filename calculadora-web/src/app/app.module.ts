@@ -8,12 +8,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 
-import { LangingPageComponent } from './pages/langing-page/langing-page.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LangingPageComponent
+    LandingPageComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
