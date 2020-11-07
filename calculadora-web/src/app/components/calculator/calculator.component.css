@@ -1,9 +1,61 @@
 mat-card {
-  width: 20%;
-  margin: 50px auto;
+  width: 25vw;
+  margin: 50px;
 }
 
 form { 
   display: flex;
   flex-direction: column;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.container h2 {
+  text-align: center;
+}
+
+.btn-voltar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-bottom: 20px; 
+}
+
+.btn-voltar button {
+  background-color: #FFF;
+  color: #000;
+}
+
+.btn-voltar mat-icon {
+  margin-left: -10px;
+}
+
+#resultado {
+  text-align: center;
+}
+
+#resultado p {
+  margin-top: 30%;
+  font-weight: 800;
+}
+
+.warning {
+  color: rgb(207, 0, 0);
+}
+
+@media (max-width: 920px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  mat-card {
+    width: 50vw;
+  }
 }

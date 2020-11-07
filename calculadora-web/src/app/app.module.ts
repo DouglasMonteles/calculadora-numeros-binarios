@@ -13,6 +13,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -27,7 +28,7 @@ import { FooterComponent } from './components/footer/footer.component';
     DashboardComponent,
     HeaderComponent,
     CalculatorComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +41,7 @@ import { FooterComponent } from './components/footer/footer.component';
     MatCardModule,
     MatInputModule,
     MatSelectModule,
+    MatChipsModule,
     FormsModule,
   ],
   providers: [],

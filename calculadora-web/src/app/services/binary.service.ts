@@ -25,8 +25,10 @@ export class BinaryService {
     let divisao = 0;
 
     if (decimal === 1) {
-      return '1';
+      return '00000001';
     }
+
+    if (decimal <= 0) return;
 
     do {
       divisao = Math.floor(decimal / 2);
@@ -36,6 +38,10 @@ export class BinaryService {
 
     resto.push(divisao);
 
+    while (resto.length !== 8) {
+      resto.push(0);
+    }
+
     return this.convert(resto);
   }
 
@@ -44,21 +50,21 @@ export class BinaryService {
     let valor2 = this.convertBinaryInDecimal(binary.secondBinary);
 
     switch (operation) {
-      case 'soma':
+      case 'sum':
         const sum = (valor1 + valor2);
         return this.convertDecimalInBinary(sum);
       
-      case 'subtracao': 
+      case 'subtraction': 
         const subtraction = (valor1 - valor2);
         return this.convertDecimalInBinary(subtraction);
 
-      case 'multiplicacao':
+      case 'multiplication':
         const multiplication = (valor1 * valor2);
         return this.convertDecimalInBinary(multiplication);
 
-      case 'divisao':
+      case 'division':
         const division = (valor1 / valor2);
-        return this.convertDecimalInBinary(division);
+        return this.convertDecimalInBinary(Math.floor(division));
 
       case 'remainder':
         const remainder = (valor1 % valor2);
@@ -72,7 +78,7 @@ export class BinaryService {
 
   convert(resto): string {
     let str = '';
-    resto.forEach(caractere => str += caractere);
+    resto.reverse().forEach(caractere => str += caractere);
     return str;
   }
 

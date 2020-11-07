@@ -1,6 +1,15 @@
 footer { 
-  height: 60px;
-  text-align: center;
+  height: 35vh;
+}
+
+footer mat-chip-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+footer mat-chip-list mat-chip {
+  margin: 11px auto;
 }
 
 footer p {
