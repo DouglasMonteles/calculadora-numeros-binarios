@@ -1,3 +1,29 @@
-<p>calculator works!</p>
-<router-outlet name="dashboard"></router-outlet>
+<main>
+  <mat-card>
+    <p>Pergunta</p>
 
+    <form (submit)="calcular()">
+      <mat-form-field class="example-full-width">
+        <mat-label>Informe o 1 valor em binário:</mat-label>
+        <input matInput name="firstBinary" [(ngModel)]="binary.firstBinary" placeholder="Ex. 10100" required />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Informe o 2 valor em binário:</mat-label>
+        <input matInput name="secondBinary" [(ngModel)]="binary.secondBinary" placeholder="Ex. 101011" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Operação</mat-label>
+        <select name="option" [(ngModel)]="option" matNativeControl required>
+          <option value="soma">Soma</option>
+          <option value="subtracao">Subtração</option>
+          <option value="multiplicacao">Multiplicação</option>
+          <option value="divisao">Divisão</option>
+        </select>
+      </mat-form-field>
+
+      <button type="submit" mat-raised-button color="primary">Calcular</button>
+    </form>
+  </mat-card>
+</main>

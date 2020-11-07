@@ -1,6 +1,8 @@
 footer { 
-  width: 100vw;
   height: 60px;
-  position: fixed;
-  bottom: 0;
+  text-align: center;
+}
+
+footer p {
+  color: #FFF;
 }
