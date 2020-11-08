@@ -10,13 +10,21 @@
             matInput 
             name="firstBinary"
             formControlName="firstBinary"  
-            placeholder="Ex. 10100"
+            placeholder="Ex. 1010001"
           />
         </mat-form-field>
 
         <div class="alert-danger">
-          <p class="warning" *ngIf="formBinary.controls.firstBinary.touched && formBinary.controls.firstBinary.value === ''">
+          <p class="warning" *ngIf="errorsFirstBinary?.required">
             Preencimento obrigatório.
+          </p>
+
+          <p class="warning" *ngIf="errorsFirstBinary?.minlength">
+            Foram informados apenas {{errorsFirstBinary.minlength.actualLength}} de {{errorsFirstBinary.minlength.requiredLength}} dígitos.
+          </p>
+
+          <p class="warning" *ngIf="errorsFirstBinary?.maxlength">
+            Foram informados {{errorsFirstBinary.maxlength.actualLength}} dígitos que ultrapassaram os {{errorsFirstBinary.maxlength.requiredLength}} dígitos.
           </p>
         </div>
 
@@ -26,9 +34,23 @@
             matInput 
             name="secondBinary"
             formControlName="secondBinary"
-            placeholder="Ex. 101011" 
+            placeholder="Ex. 00101011" 
           />
         </mat-form-field>
+
+        <div class="alert-danger">
+          <p class="warning" *ngIf="errorsSecondBinary?.required">
+            Preencimento obrigatório.
+          </p>
+
+          <p class="warning" *ngIf="errorsSecondBinary?.minlength">
+            Foram informados apenas {{errorsSecondBinary.minlength.actualLength}} de {{errorsSecondBinary.minlength.requiredLength}} dígitos.
+          </p>
+
+          <p class="warning" *ngIf="errorsSecondBinary?.maxlength">
+            Foram informados {{errorsSecondBinary.maxlength.actualLength}} dígitos que ultrapassaram os {{errorsSecondBinary.maxlength.requiredLength}} dígitos.
+          </p>
+        </div>
 
         <mat-form-field appearance="fill">
           <mat-label>Operação</mat-label>
@@ -41,14 +63,22 @@
           </select>
         </mat-form-field>
 
-        <button type="submit" mat-raised-button color="primary">Calcular</button>
+        <button type="submit" mat-raised-button color="primary">
+          Calcular
+        </button>
       </form>
     </mat-card>
 
     <mat-card id="resultado">
       <h2>Resultado</h2>
-      <p class="warning" *ngIf="resultado === ''">Preencha o fomulário</p>
+      <p class="warning" *ngIf="resultado === ''">
+        Preencha o fomulário e clique no botão Calcular
+      </p>
       <p>{{resultado}}</p>
+
+      <button *ngIf="resultado !== ''" type="submit" mat-raised-button color="warn" (click)="calcularNovamente()">
+        Calcular novamente
+      </button>
     </mat-card>
   </div>
 

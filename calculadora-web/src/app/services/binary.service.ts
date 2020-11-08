@@ -28,7 +28,10 @@ export class BinaryService {
       return '00000001';
     }
 
-    if (decimal <= 0) return;
+    if (decimal <= 0 || decimal >= 256) {
+      alert(`O valor informado não pode ser superior a 255 em decimal.\nValor informado em decimal: ${decimal}`);
+      return '';
+    }
 
     do {
       divisao = Math.floor(decimal / 2);
@@ -71,7 +74,7 @@ export class BinaryService {
         return this.convertDecimalInBinary(remainder);
 
       default: 
-        alert('Selecione uma opção válida!')
+        alert('Selecione uma opção válida!');
         return;
     }
   }

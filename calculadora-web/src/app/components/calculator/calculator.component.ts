@@ -1,8 +1,10 @@
-import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
-import BinaryModel from 'src/app/models/binary.model';
+import { Component, OnInit } from '@angular/core';
 import { BinaryService } from 'src/app/services/binary.service';
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+
+import BinaryModel from 'src/app/models/binary.model';
+import BinaryErrorModel from 'src/app/models/binary-error.model';
 
 @Component({
   selector: 'app-calculator',
@@ -14,22 +16,21 @@ export class CalculatorComponent implements OnInit {
   formBinary: FormGroup;
 
   binary: BinaryModel = {
-    firstBinary: '', 
+    firstBinary: '',
     secondBinary: '',
-    firstDecimalValue: 0,
-    secondDecimalValue: 0,
   };
+
+  errorsFirstBinary: BinaryErrorModel;
+  errorsSecondBinary: BinaryErrorModel;
 
   option: string = '';
   resultado: string = '';
 
-  tamanho: number = 0;
-
   constructor(
-    private binaryService: BinaryService, 
+    private binaryService: BinaryService,
     private router: Router,
     private formBuilder: FormBuilder,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.formBinary = this.formBuilder.group({
@@ -52,50 +53,37 @@ export class CalculatorComponent implements OnInit {
       ]]
     });
 
-    if (this.formBinary && this.formBinary.disabled) {
-      this.formBinary.enable();
-    }
-
     this.formBinary.valueChanges.forEach((value: BinaryModel) => {
       this.binary = {
         firstBinary: value.firstBinary,
         secondBinary: value.secondBinary,
-        firstDecimalValue: 0,
-        secondDecimalValue: 0,
       }
-    });
 
-    this.formBinary.controls.firstBinary.valueChanges.subscribe({
-      next: () => {
-
-      }
+      this.errorsFirstBinary = this.formBinary.controls.firstBinary.errors as BinaryErrorModel;
+      this.errorsSecondBinary = this.formBinary.controls.secondBinary.errors as BinaryErrorModel;
+    
+      console.log(this.errorsFirstBinary)
     });
 
   }
 
   calcular(): void {
-    console.log(this.formBinary)
-    if (this.formBinary.status === 'INVALID') return;
+    if (!this.formBinary.valid) return;
 
-    this.binary.firstDecimalValue = this.binaryService.convertBinaryInDecimal(this.formBinary.value.firstBinary);
-    this.binary.secondDecimalValue = this.binaryService.convertBinaryInDecimal(this.formBinary.value.secondBinary);
+    this.option = this.formBinary.value.option;
+    this.resultado = this.binaryService.operation(this.binary, this.option);
+    if (this.resultado !== '') {
+      this.formBinary.disable();
+    }
+  }
 
-    this.resultado = this.binaryService.operation(this.binary, this.formBinary.value.option);
-    this.clearData();
+  calcularNovamente(): void {
+    this.formBinary.enable();
+    this.resultado = '';
   }
 
   voltar(): void {
     this.router.navigateByUrl('landingPage');
-  }
-
-  clearData(): void {
-    this.formBinary.reset({
-      firstBinary: '', 
-      secondBinary: '', 
-      option: '',
-    });
-
-    this.formBinary.enable();
   }
 
 }
