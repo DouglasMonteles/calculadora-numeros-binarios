@@ -60,4 +60,4 @@ Para baixar o projeto e rodar localmente, siga os passos abaixo:
 
 ## Apresentação
 
-<img src="./calculadora-web/src/assets/apresentacao.git">
+<img src="./calculadora-web/src/assets/apresentacao.gif">
