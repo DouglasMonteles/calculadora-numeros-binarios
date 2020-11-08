@@ -9,7 +9,7 @@ A resolução desse exercício foi desenvolvida utilizando o framework Angular, 
 ## Acessando 
 Atualmente, o sistema encontra-se hospedado no <a href="https://www.netlify.com/">Netlify</a>, empresa de computação em nuvem.
 
-Para acessa-lo, clique <a href="">**aqui**</a> ou copie e cole o endereço web abaixo:
+Para acessa-lo, clique <a href="https://calculadora-binario.netlify.app/landingPage">**aqui**</a> ou copie e cole o endereço web abaixo:
 ```
   https://calculadora-binario.netlify.app/landingPage
 ```
