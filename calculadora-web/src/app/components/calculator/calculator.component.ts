@@ -20,11 +20,11 @@ export class CalculatorComponent implements OnInit {
     secondBinary: '',
   };
 
-  errorsFirstBinary: BinaryErrorModel;
-  errorsSecondBinary: BinaryErrorModel;
-
   option: string = '';
   resultado: string = '';
+
+  errorsFirstBinary: BinaryErrorModel;
+  errorsSecondBinary: BinaryErrorModel;
 
   constructor(
     private binaryService: BinaryService,
@@ -61,8 +61,6 @@ export class CalculatorComponent implements OnInit {
 
       this.errorsFirstBinary = this.formBinary.controls.firstBinary.errors as BinaryErrorModel;
       this.errorsSecondBinary = this.formBinary.controls.secondBinary.errors as BinaryErrorModel;
-    
-      console.log(this.errorsFirstBinary)
     });
 
   }
@@ -72,6 +70,7 @@ export class CalculatorComponent implements OnInit {
 
     this.option = this.formBinary.value.option;
     this.resultado = this.binaryService.operation(this.binary, this.option);
+    
     if (this.resultado !== '') {
       this.formBinary.disable();
     }
