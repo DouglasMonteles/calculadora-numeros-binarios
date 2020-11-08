@@ -3,20 +3,36 @@
     <mat-card>
       <h2>Calculadora de Binários</h2>
 
-      <form (submit)="calcular()">
+      <form [formGroup]="formBinary" (ngSubmit)="calcular()">
         <mat-form-field class="example-full-width">
           <mat-label>Informe o 1 valor em binário:</mat-label>
-          <input matInput name="firstBinary" [(ngModel)]="binary.firstBinary" placeholder="Ex. 10100" />
+          <input 
+            matInput 
+            name="firstBinary"
+            formControlName="firstBinary"  
+            placeholder="Ex. 10100"
+          />
         </mat-form-field>
+
+        <div class="alert-danger">
+          <p class="warning" *ngIf="formBinary.controls.firstBinary.touched && formBinary.controls.firstBinary.value === ''">
+            Preencimento obrigatório.
+          </p>
+        </div>
 
         <mat-form-field class="example-full-width">
           <mat-label>Informe o 2 valor em binário:</mat-label>
-          <input matInput name="secondBinary" [(ngModel)]="binary.secondBinary" placeholder="Ex. 101011" />
+          <input 
+            matInput 
+            name="secondBinary"
+            formControlName="secondBinary"
+            placeholder="Ex. 101011" 
+          />
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Operação</mat-label>
-          <select name="option" [(ngModel)]="option" matNativeControl>
+          <select name="option" formControlName="option" matNativeControl>
             <option value="sum">Soma</option>
             <option value="subtraction">Subtração</option>
             <option value="multiplication">Multiplicação</option>

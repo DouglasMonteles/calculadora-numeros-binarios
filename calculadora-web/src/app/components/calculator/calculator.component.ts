@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import BinaryModel from 'src/app/models/binary.model';
 import { BinaryService } from 'src/app/services/binary.service';
 import { Router } from '@angular/router';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-calculator',
@@ -9,6 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./calculator.component.css']
 })
 export class CalculatorComponent implements OnInit {
+
+  formBinary: FormGroup;
 
   binary: BinaryModel = {
     firstBinary: '', 
@@ -20,21 +23,64 @@ export class CalculatorComponent implements OnInit {
   option: string = '';
   resultado: string = '';
 
+  tamanho: number = 0;
+
   constructor(
     private binaryService: BinaryService, 
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder,
   ) {}
 
   ngOnInit(): void {
+    this.formBinary = this.formBuilder.group({
+      firstBinary: [this.binary.firstBinary, [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(8),
+        Validators.pattern('[10]*'),
+      ]],
+
+      secondBinary: [this.binary.secondBinary, [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(8),
+        Validators.pattern('[10]*'),
+      ]],
+
+      option: [this.option, [
+        Validators.required
+      ]]
+    });
+
+    if (this.formBinary && this.formBinary.disabled) {
+      this.formBinary.enable();
+    }
+
+    this.formBinary.valueChanges.forEach((value: BinaryModel) => {
+      this.binary = {
+        firstBinary: value.firstBinary,
+        secondBinary: value.secondBinary,
+        firstDecimalValue: 0,
+        secondDecimalValue: 0,
+      }
+    });
+
+    this.formBinary.controls.firstBinary.valueChanges.subscribe({
+      next: () => {
+
+      }
+    });
+
   }
 
   calcular(): void {
-    if (this.binary.firstBinary === '' || this.binary.secondBinary === '' || this.option === '') return;
+    console.log(this.formBinary)
+    if (this.formBinary.status === 'INVALID') return;
 
-    this.binary.firstDecimalValue = this.binaryService.convertBinaryInDecimal(this.binary.firstBinary);
-    this.binary.secondDecimalValue = this.binaryService.convertBinaryInDecimal(this.binary.secondBinary);
+    this.binary.firstDecimalValue = this.binaryService.convertBinaryInDecimal(this.formBinary.value.firstBinary);
+    this.binary.secondDecimalValue = this.binaryService.convertBinaryInDecimal(this.formBinary.value.secondBinary);
 
-    this.resultado = this.binaryService.operation(this.binary, this.option);
+    this.resultado = this.binaryService.operation(this.binary, this.formBinary.value.option);
     this.clearData();
   }
 
@@ -43,8 +89,13 @@ export class CalculatorComponent implements OnInit {
   }
 
   clearData(): void {
-    this.binary.firstBinary = '';
-    this.binary.secondBinary = '';
+    this.formBinary.reset({
+      firstBinary: '', 
+      secondBinary: '', 
+      option: '',
+    });
+
+    this.formBinary.enable();
   }
 
 }

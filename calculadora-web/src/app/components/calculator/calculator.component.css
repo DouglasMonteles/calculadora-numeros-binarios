@@ -43,6 +43,15 @@ form {
   font-weight: 800;
 }
 
+.alert-danger {
+  margin: 0;
+  padding: 0;
+}
+
+.alert-danger p {
+  font-size: 8pt;
+}
+
 .warning {
   color: rgb(207, 0, 0);
 }

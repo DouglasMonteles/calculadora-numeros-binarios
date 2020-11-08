@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -34,6 +34,7 @@ import { FooterComponent } from './components/footer/footer.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     MatMenuModule,
     MatButtonModule,
     MatIconModule,
@@ -42,7 +43,6 @@ import { FooterComponent } from './components/footer/footer.component';
     MatInputModule,
     MatSelectModule,
     MatChipsModule,
-    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
