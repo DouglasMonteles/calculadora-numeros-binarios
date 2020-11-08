@@ -23,3 +23,24 @@
 .sobre button {
   height: 60px;
 }
+
+@media (max-width: 780px) {
+  .lading-page { 
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  section div p {
+    font-size: 16pt;
+  }
+
+  .sobre p {
+    margin-bottom: 5rem;
+  }
+
+  img { 
+    width: 250px;
+    height: 35vh;
+    margin-bottom: 15px;
+  }  
+}
